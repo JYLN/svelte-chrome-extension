@@ -1,0 +1,11 @@
+{
+	"manifest_version": 3,
+	"name": "Chrome Extension",
+	"version": "0.0.1",
+	"description": "Chrome Extension",
+	"action": {
+		"default_title": "Sveltekit Chrome Extension",
+		"default_popup": "index.html"
+	},
+	"permissions": ["storage"]
+}
