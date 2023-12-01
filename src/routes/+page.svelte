@@ -5,10 +5,6 @@
 	let value: string = '';
 	let result: string = '';
 
-	function select(this: HTMLInputElement, event: Event) {
-		this.select();
-	}
-
 	async function calculate() {
 		result = await evaluate(value);
 
@@ -36,7 +32,7 @@
 <div class="container">
 	<h1>Calculator</h1>
 	<form on:submit|preventDefault={calculate}>
-		<input type="text" placeholder="1 + 2" bind:value on:click={select} />
+		<input type="text" id="equation" placeholder="1 + 2" bind:value />
 	</form>
 
 	<p>{result}</p>
