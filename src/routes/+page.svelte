@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { evaluate } from 'mathjs';
+	import { onMount } from 'svelte';
 
 	let value: string = '';
 	let result: string = '';
@@ -8,9 +9,23 @@
 		this.select();
 	}
 
-	function calculate() {
-		result = evaluate(value);
+	async function calculate() {
+		result = await evaluate(value);
+
+		chrome.storage.local.set({ equation: value, result }).then(() => {
+			console.log('Value is set to ' + result);
+		});
 	}
+
+	onMount(() => {
+		chrome.storage.local.get(['equation', 'result']).then((store) => {
+			const eq = store['equation'];
+			const res = store['result'];
+
+			value = eq || '';
+			result = res || 'Result';
+		});
+	});
 </script>
 
 <svelte:head>
